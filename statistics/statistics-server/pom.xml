@@ -6,12 +6,11 @@
         <artifactId>statistics</artifactId>
         <groupId>ru.practicum</groupId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
 
     <artifactId>statistics-server</artifactId>
-    <packaging>jar</packaging>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
     <name>statistics-server</name>
 
     <dependencies>

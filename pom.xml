@@ -25,9 +25,8 @@
 	</properties>
 
 	<modules>
+		<module>ewm</module>
 		<module>statistics</module>
-		<module>statistics/statistics-client</module>
-		<module>statistics/statistics-data-models</module>
 	</modules>
 
 	<dependencies>

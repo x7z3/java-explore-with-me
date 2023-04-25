@@ -2,20 +2,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>statistics</artifactId>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
-
     <parent>
         <groupId>ru.practicum</groupId>
         <artifactId>explore-with-me</artifactId>
         <version>1.0.0</version>
-        <relativePath/>
     </parent>
+
+    <artifactId>statistics</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>statistics-server</module>
         <module>statistics-client</module>
-        <module>statistics-server</module>
+        <module>statistics-data-models</module>
     </modules>
 </project>
