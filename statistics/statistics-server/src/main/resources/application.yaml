@@ -1,0 +1,18 @@
+server:
+  port: 9090
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/statsDb
+    username: user
+    password: password
