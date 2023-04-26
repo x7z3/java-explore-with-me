@@ -2,9 +2,9 @@ server:
   port: 8080
 spring:
   datasource:
-    username: ${SPRING_DATASOURCE_USERNAME}
-    url: ${SPRING_DATASOURCE_URL}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/ewmDb
+    username: user
+    password: password
   jpa:
     properties:
       hibernate:
@@ -14,3 +14,5 @@ spring:
       ddl-auto: update
   application:
     name: ewm-service
+statistics:
+  service-url: http://localhost:9090
