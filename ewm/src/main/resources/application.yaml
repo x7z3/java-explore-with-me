@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ewmDb
+    username: user
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+  application:
+    name: ewm-service
+statistics:
+  service-url: http://localhost:9090
