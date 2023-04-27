@@ -12,37 +12,36 @@ import java.util.List;
 
 @Repository
 public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
-
-    @Query("select new ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, count(h.id)) " +
-            "from EndpointHit h " +
-            "where h.timestamp > :start " +
-            "  and h.timestamp < :end " +
-            "group by h.app, h.uri order by count(h.id) DESC")
+    @Query("SELECT NEW ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, COUNT(h.id)) " +
+            "FROM EndpointHit h " +
+            "WHERE h.timestamp > :start " +
+            "  AND h.timestamp < :end " +
+            "GROUP BY h.app, h.uri ORDER BY COUNT(h.id) DESC")
     List<ViewStatsDto> getViewStats(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("select new ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, count(distinct h.ip)) " +
-            "from EndpointHit h " +
-            "where h.timestamp > :start " +
-            "  and h.timestamp < :end " +
-            "group by h.app, h.uri order by count(h.id) DESC")
+    @Query("SELECT NEW ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, COUNT(DISTINCT h.ip)) " +
+            "FROM EndpointHit h " +
+            "WHERE h.timestamp > :start " +
+            "  AND h.timestamp < :end " +
+            "GROUP BY h.app, h.uri ORDER BY COUNT(h.id) DESC")
     List<ViewStatsDto> getUniqueViewStats(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("select new ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, count(h.id)) " +
-            "from EndpointHit h " +
-            "where h.timestamp > :start " +
-            "  and h.timestamp < :end " +
-            "  and h.uri in :uris " +
-            "group by h.app, h.uri order by count(h.id) DESC")
+    @Query("SELECT NEW ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, COUNT(h.id)) " +
+            "FROM EndpointHit h " +
+            "WHERE h.timestamp > :start " +
+            "  AND h.timestamp < :end " +
+            "  AND h.uri IN :uris " +
+            "GROUP BY h.app, h.uri ORDER BY COUNT(h.id) DESC")
     List<ViewStatsDto> getViewStatsByUris(@Param("start") LocalDateTime start,
                                           @Param("end") LocalDateTime end,
                                           @Param("uris") String[] uris);
 
-    @Query("select new ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, count(distinct h.ip)) " +
-            "from EndpointHit h " +
-            "where h.timestamp > :start " +
-            "  and h.timestamp < :end " +
-            "  and h.uri in :uris " +
-            "group by h.app, h.uri order by count(h.id) DESC")
+    @Query("SELECT NEW ru.practicum.statistics.dto.ViewStatsDto(h.app, h.uri, COUNT(DISTINCT h.ip)) " +
+            "FROM EndpointHit h " +
+            "WHERE h.timestamp > :start " +
+            "  AND h.timestamp < :end " +
+            "  AND h.uri IN :uris " +
+            "GROUP BY h.app, h.uri ORDER BY COUNT(h.id) DESC")
     List<ViewStatsDto> getUniqueViewStatsByUris(@Param("start") LocalDateTime start,
                                                 @Param("end") LocalDateTime end,
                                                 @Param("uris") String[] uris);

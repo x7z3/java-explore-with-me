@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "")
+@RequestMapping
 public class TestController {
     private final StatisticsRestClient statsClient;
 
