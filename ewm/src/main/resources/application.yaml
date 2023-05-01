@@ -14,5 +14,3 @@ spring:
       ddl-auto: update
   application:
     name: ewm-service
-statistics:
-  service-url: http://localhost:9090

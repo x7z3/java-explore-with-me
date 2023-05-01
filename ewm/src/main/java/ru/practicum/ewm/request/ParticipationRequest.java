@@ -27,7 +27,7 @@ public class ParticipationRequest {
     @CreationTimestamp
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long requesterId;
 
     @Enumerated(EnumType.STRING)
