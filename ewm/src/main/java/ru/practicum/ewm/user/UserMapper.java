@@ -1,5 +1,7 @@
 package ru.practicum.ewm.user;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.user.dto.NewUserRequest;
@@ -9,10 +11,8 @@ import ru.practicum.ewm.user.dto.UserShortDto;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class UserMapper {
-    private UserMapper() {
-    }
-
     public static User toUser(NewUserRequest userRequest) {
         User user = new User();
         user.setName(userRequest.getName());

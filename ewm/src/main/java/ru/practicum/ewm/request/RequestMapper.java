@@ -1,15 +1,15 @@
 package ru.practicum.ewm.request;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm.event.dto.EventRequestStatusUpdateResult;
 import ru.practicum.ewm.request.dto.ParticipationRequestDto;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RequestMapper {
-    private RequestMapper() {
-    }
-
     public static ParticipationRequestDto toRequestDto(ParticipationRequest request) {
         ParticipationRequestDto requestDto = new ParticipationRequestDto();
         requestDto.setId(request.getId());

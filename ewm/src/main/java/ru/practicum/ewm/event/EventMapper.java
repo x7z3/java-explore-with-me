@@ -1,5 +1,7 @@
 package ru.practicum.ewm.event;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryMapper;
 import ru.practicum.ewm.compilation.dto.CompilationDto;
@@ -15,10 +17,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class EventMapper {
-    private EventMapper() {
-    }
-
     public static Event toEvent(User initiator, Category category, NewEventDto eventDto) {
         Event event = new Event();
         event.setAnnotation(eventDto.getAnnotation());

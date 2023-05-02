@@ -1,5 +1,7 @@
 package ru.practicum.ewm.category;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.ewm.category.dto.CategoryDto;
 import ru.practicum.ewm.category.dto.NewCategoryDto;
 import ru.practicum.ewm.event.dto.EventFullDto;
@@ -9,10 +11,8 @@ import ru.practicum.ewm.event.dto.UpdateEventUserRequest;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CategoryMapper {
-    private CategoryMapper() {
-    }
-
     public static Category toCategory(NewCategoryDto categoryDto) {
         Category category = new Category();
         category.setName(categoryDto.getName());
