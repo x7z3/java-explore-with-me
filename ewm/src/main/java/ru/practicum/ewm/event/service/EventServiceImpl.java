@@ -52,7 +52,6 @@ public class EventServiceImpl implements EventService {
     private final CategoryRepository categoryRepository;
     private final RequestRepository requestRepository;
     private final StatisticsRestClient statsClient;
-    private final CategoryMapper categoryMapper;
 
     @Override
     public Map<Long, Long> getViews(Collection<Event> events) {
@@ -183,7 +182,7 @@ public class EventServiceImpl implements EventService {
             eventToUpdate.setAnnotation(updateRequest.getAnnotation());
         }
         if (updateRequest.getCategory() != null) {
-            eventToUpdate.setCategory(categoryMapper.toCategory(updateRequest.getCategory()));
+            eventToUpdate.setCategory(CategoryMapper.toCategory(updateRequest.getCategory()));
         }
         if (updateRequest.getDescription() != null) {
             eventToUpdate.setDescription(updateRequest.getDescription());
