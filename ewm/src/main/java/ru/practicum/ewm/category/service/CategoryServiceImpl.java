@@ -22,25 +22,27 @@ public class CategoryServiceImpl implements CategoryService {
     private static final NotFoundException CATEGORY_NOT_FOUND_EXCEPTION = new NotFoundException("Category not found.");
     private static final ConflictException NAME_IS_NOT_UNIQUE_CONFLICT_EXCEPTION = new ConflictException("Name is not unique.");
     public static final ConflictException LINKED_EVENTS_EXISTING_EXCEPTION = new ConflictException("Cannot delete category with linked events.");
+
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public CategoryDto addCategory(final NewCategoryDto categoryDto) {
-        Category category = CategoryMapper.toCategory(categoryDto);
+        Category category = categoryMapper.toCategory(categoryDto);
         Category createdCategory;
         try {
             createdCategory = categoryRepository.save(category);
         } catch (DataIntegrityViolationException e) {
             throw NAME_IS_NOT_UNIQUE_CONFLICT_EXCEPTION;
         }
-        return CategoryMapper.toCategoryDto(createdCategory);
+        return categoryMapper.toCategoryDto(createdCategory);
     }
 
     @Override
     public Collection<CategoryDto> findCategories(Integer from, Integer size) {
         Pageable pageable = PaginationHelper.makePageable(from, size);
-        return CategoryMapper.toCategoryDto(categoryRepository.findAll(pageable).getContent());
+        return categoryMapper.toCategoryDto(categoryRepository.findAll(pageable).getContent());
     }
 
     @Override
@@ -56,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
         } catch (DataIntegrityViolationException e) {
             throw NAME_IS_NOT_UNIQUE_CONFLICT_EXCEPTION;
         }
-        return CategoryMapper.toCategoryDto(updatedCategory);
+        return categoryMapper.toCategoryDto(updatedCategory);
     }
 
     @Override
@@ -73,6 +75,6 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto findCategory(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(()
                 -> CATEGORY_NOT_FOUND_EXCEPTION);
-        return CategoryMapper.toCategoryDto(category);
+        return categoryMapper.toCategoryDto(category);
     }
 }
