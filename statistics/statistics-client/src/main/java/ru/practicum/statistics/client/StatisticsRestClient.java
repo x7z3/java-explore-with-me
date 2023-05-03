@@ -29,8 +29,8 @@ public class StatisticsRestClient extends AbstractRestClient {
 
     @Autowired
     public StatisticsRestClient(
-        @Value("${statistics.service-url}") String applicationName,
-        @Value("${spring.application.name}") String serviceUrl
+        @Value("${services.stats-server.uri:http://stats-server:9090}") String serviceUrl,
+        @Value("${spring.application.name}") String applicationName
     ) {
         super(
                 new RestTemplateBuilder()
