@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryMapper;
+import ru.practicum.ewm.comment.CommentMapper;
 import ru.practicum.ewm.compilation.dto.CompilationDto;
 import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.EventShortDto;
@@ -12,13 +13,14 @@ import ru.practicum.ewm.event.enums.EventState;
 import ru.practicum.ewm.user.User;
 import ru.practicum.ewm.user.UserMapper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class EventMapper {
+public class EventMapper {
     public static Event toEvent(User initiator, Category category, NewEventDto eventDto) {
         Event event = new Event();
         event.setAnnotation(eventDto.getAnnotation());
@@ -53,6 +55,11 @@ public final class EventMapper {
         eventDto.setState(event.getState());
         eventDto.setTitle(event.getTitle());
         eventDto.setViews(views == null ? 0 : views);
+        if (event.getComments() == null) {
+            eventDto.setComments(new ArrayList<>());
+        } else {
+            eventDto.setComments(CommentMapper.toCommentShortInnerDto(event.getComments()));
+        }
         return eventDto;
     }
 

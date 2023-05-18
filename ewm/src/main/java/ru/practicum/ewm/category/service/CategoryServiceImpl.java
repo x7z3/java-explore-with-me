@@ -22,6 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     private static final NotFoundException CATEGORY_NOT_FOUND_EXCEPTION = new NotFoundException("Category not found.");
     private static final ConflictException NAME_IS_NOT_UNIQUE_CONFLICT_EXCEPTION = new ConflictException("Name is not unique.");
     public static final ConflictException LINKED_EVENTS_EXISTING_EXCEPTION = new ConflictException("Cannot delete category with linked events.");
+
     private final CategoryRepository categoryRepository;
     private final EventRepository eventRepository;
 

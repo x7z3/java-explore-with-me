@@ -2,6 +2,7 @@ package ru.practicum.ewm.user;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import ru.practicum.ewm.comment.dto.CommentFullDto;
 import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.user.dto.NewUserRequest;
@@ -22,6 +23,22 @@ public final class UserMapper {
 
     public static UserDto toUserDto(User user) {
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        return userDto;
+    }
+
+    public static EventFullDto.CommentInnerDto.UserDto toCommentShortUserInnerDto(User user) {
+        EventFullDto.CommentInnerDto.UserDto userDto = new EventFullDto.CommentInnerDto.UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        return userDto;
+    }
+
+    public static CommentFullDto.UserDto toCommentFullUserInnerDto(User user) {
+        CommentFullDto.UserDto userDto = new CommentFullDto.UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());

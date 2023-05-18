@@ -43,15 +43,15 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
-    public static final NotFoundException EVENT_NOT_FOUND_EXCEPTION = new NotFoundException("Event not found");
-    public static final NotFoundException USER_NOT_FOUND_EXCEPTION = new NotFoundException("User not found");
+    private static final NotFoundException EVENT_NOT_FOUND_EXCEPTION = new NotFoundException("Event not found");
+    private static final NotFoundException USER_NOT_FOUND_EXCEPTION = new NotFoundException("User not found");
+    private static final ConflictException INCORRECT_EVENT_TIME_EXCEPTION = new ConflictException("Incorrect event time");
+
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final RequestRepository requestRepository;
     private final StatisticsRestClient statsClient;
-
-    private final ConflictException conflictExceptionIncorrectEventTime = new ConflictException("Incorrect event time");
 
     @Override
     public Map<Long, Long> getViews(Collection<Event> events) {
@@ -80,7 +80,7 @@ public class EventServiceImpl implements EventService {
     public EventFullDto addEvent(final Long userId, final NewEventDto eventDto) {
         if (eventDto.getEventDate() != null
                 && eventDto.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
-            throw conflictExceptionIncorrectEventTime;
+            throw INCORRECT_EVENT_TIME_EXCEPTION;
         }
         User initiator = userRepository.findById(userId).orElseThrow(RuntimeException::new);
         Category category = categoryRepository.findById(eventDto.getCategory()).orElseThrow(RuntimeException::new);
@@ -169,7 +169,7 @@ public class EventServiceImpl implements EventService {
         if (
                 updateRequest.getEventDate() != null
                         && updateRequest.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
-            throw conflictExceptionIncorrectEventTime;
+            throw INCORRECT_EVENT_TIME_EXCEPTION;
         }
         if (eventToUpdate.getState() == EventState.PUBLISHED) {
             throw new ConflictException("Cannot update published event");
@@ -222,7 +222,7 @@ public class EventServiceImpl implements EventService {
 
         if (updateRequest.getEventDate() != null
                 && updateRequest.getEventDate().isBefore(LocalDateTime.now().plusHours(1))) {
-            throw conflictExceptionIncorrectEventTime;
+            throw INCORRECT_EVENT_TIME_EXCEPTION;
         }
 
         if (updateRequest.getStateAction() != null) {

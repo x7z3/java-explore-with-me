@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.ewm.category.Category;
+import ru.practicum.ewm.comment.Comment;
 import ru.practicum.ewm.event.enums.EventState;
 import ru.practicum.ewm.request.ParticipationRequest;
 import ru.practicum.ewm.request.enums.ParticipationRequestStatus;
@@ -39,6 +40,10 @@ public class Event {
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Collection<ParticipationRequest> requests;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Collection<Comment> comments;
 
     @CreationTimestamp
     private LocalDateTime createdOn;
